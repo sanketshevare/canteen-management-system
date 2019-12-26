@@ -1,0 +1,18 @@
+<?php
+$conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
+$result = mysqli_query($conn, "SELECT * FROM food_items");
+?>
+<form>
+<?php
+$i=0;
+while($row = mysqli_fetch_array($result)) {
+?>
+  <input type="checkbox" name="<?=$row["item_name"];?>" value="<?=$row["item_name"];?>" > <?=$row["item_name"];?> <br>
+<?php
+$i++;
+}
+?>
+</form>
+<?php
+mysqli_close($conn);
+?>

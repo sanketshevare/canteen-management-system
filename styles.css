@@ -1,0 +1,33 @@
+body{
+	font-family: calibri;
+}
+.tblLogin {
+	border: #95bee6 1px solid;
+    background: #d1e8ff;
+    border-radius: 4px;
+}
+.tableheader {
+    font-size: 24px;
+}
+.tableheader td {
+    padding: 20px;
+}
+.tablerow td{
+	text-align:center;
+}
+.message {
+color: #FF0000;
+font-weight: bold;
+text-align: center;
+width: 100%;
+}
+.login-input {
+	border: #CCC 1px solid;
+    padding: 10px 20px;
+}
+.btnSubmit {
+	padding: 10px 20px;
+    background: #2c7ac5;
+    border: #d1e8ff 1px solid;
+    color: #FFF;
+}
