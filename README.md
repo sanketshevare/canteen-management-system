@@ -38,7 +38,7 @@ User has the interface to check his/her balance and also order items.
      Run the project :
       
           - Open new tab in chrome
-          - type the following url : http://localhost/dbms/signin.php
+          - type the following url : http://localhost/dbms/login.php
           - enjoy.
           
 
