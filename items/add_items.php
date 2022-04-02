@@ -3,31 +3,19 @@
 
 $message="";
 if(count($_POST)>0) {
-	$conn = mysqli_connect("localhost","root","","canteen_delivery_system");
+	$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
 		if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-	$a=$_POST['Faculty_name'];
-	$sql="select * from user   where username='$a' ";
-	$result = mysqli_query($conn,$sql);
-	$row=mysqli_num_rows($result);
+	$result = mysqli_query($conn," insert into food_items values ('"  . $_POST["Item_name"] . "','" . $_POST["Item_cost"] . "','1')");
 
-	if ($row ==0)
- {
-		$message = "invalid item name\\nTry again.";
+	if (!$result) {
+		$message = "invalid item\\nTry again.";
 		echo "<script type='text/javascript'>alert('$message');</script>";
+	    }
 
-	}
-
-	$sql=" delete  from user  where  username='" . $_POST["Faculty_name"] . "' ";
-	$result = mysqli_query($conn,$sql);
 }
-
-
-
-
-
 ?>
 
 
@@ -64,20 +52,27 @@ if(count($_POST)>0) {
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title">Enter User Name</h2>
+                    <h2 class="title">Enter Item Details</h2>
                     <form name="Add_Item" method="post" action="">
 					<div class="message"><?php if($message!="") { echo $message; } ?></div>
-
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">User Name</label>
-                                    <input class="input--style-4" type="text"name="Faculty_name" required>
+                                    <label class="label">Item Name</label>
+                                    <input class="input--style-4" type="text" name="Item_name" required>
                                 </div>
                             </div>
 
                         </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Item Cost</label>
+                                    <input class="input--style-4" type="text" name="Item_cost" pattern="[0-9]*"  required>
+                                </div>
+                            </div>
 
+                        </div>
 
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue" type="submit" value="Submit">Submit</button>

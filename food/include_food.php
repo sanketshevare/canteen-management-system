@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
+$conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
 $result = mysqli_query($conn, "SELECT * FROM food_items ");
 ?>
 <html>
@@ -38,7 +38,7 @@ $result = mysqli_query($conn, "SELECT * FROM food_items ");
   background: -o-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
   background: linear-gradient(to top right, #fc2c77 0%, #6c4079 100%);">
 <div style="background-color:white;">
-<form action="include.php" method='post'>
+<form action="./include.php" method='post'>
 <fieldset style="border:solid 5px ; ">
 
   <legend style="align:center">Items Available</legend>

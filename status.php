@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
+$conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
 $result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ORDER BY timestamp DESC ");
 ?>
 <html>
@@ -37,7 +37,7 @@ $result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ORDE
   background: -moz-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
   background: -o-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
   background: linear-gradient(to top right, #fc2c77 0%, #6c4079 100%);">
-<div style="background-color:white;"><form action="confirmed.php" method='post'>
+<div style="background-color:white;"><form action="./confirmed.php" method='post'>
 <fieldset style="border:solid 5px;">
   <legend>Item Orders</legend>
 	<table style="border:solid">

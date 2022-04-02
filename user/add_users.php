@@ -3,12 +3,12 @@
 
 $message="";
 if(count($_POST)>0) {
-	$conn = mysqli_connect("localhost","root","","canteen_delivery_system");
+	$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
 		if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-		$result = mysqli_query($conn," insert into user values ('" . $_POST["userName"] . "','" . $_POST["password"] . "','" . $_POST["privilage"] . "','0')");
+		$result = mysqli_query($conn," insert into user (username,password ,type,email) values ('" . $_POST["username"] . "','" . $_POST["password"] . "','" . $_POST["privilage"] . "','" . $_POST["email"] . "')");
 
 	}
 
@@ -55,7 +55,7 @@ if(count($_POST)>0) {
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">User Name</label>
-                                    <input class="input--style-4" type="text" name="userName" required>
+                                    <input class="input--style-4" type="text" name="username" required>
                                 </div>
                             </div>
 
@@ -67,7 +67,10 @@ if(count($_POST)>0) {
                                     <input class="input--style-4" type="password" name="password" required>
                                 </div>
                             </div>
-
+                            <div class="input-group">
+                                    <label class="label">User Email</label>
+                                    <input class="input--style-4" type="email" name="email" placeholder="email" required ">
+                                </div>
                         </div>
 						 <div class="row row-space">
                             <div class="col-2">
@@ -78,7 +81,7 @@ if(count($_POST)>0) {
                             </div>
 
                         </div>
-
+                       
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue" type="submit" value="Submit">Submit</button>
                         </div>

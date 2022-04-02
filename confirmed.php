@@ -1,7 +1,7 @@
 <?php
 session_start();
 $total =0;
-$conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
+$conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
 
 foreach($_POST as $x => $x_value) {
 

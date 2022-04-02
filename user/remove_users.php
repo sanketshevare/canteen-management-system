@@ -1,4 +1,34 @@
+<?php
 
+
+$message="";
+if(count($_POST)>0) {
+	$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
+		if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+	$a=$_POST['Faculty_name'];
+	$sql="select * from user   where username='$a' ";
+	$result = mysqli_query($conn,$sql);
+	$row=mysqli_num_rows($result);
+
+	if ($row ==0)
+ {
+		$message = "invalid item name\\nTry again.";
+		echo "<script type='text/javascript'>alert('$message');</script>";
+
+	}
+
+	$sql=" delete  from user  where  username='" . $_POST["Faculty_name"] . "' ";
+	$result = mysqli_query($conn,$sql);
+}
+
+
+
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -34,70 +64,25 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    
-					<?php
-session_start();
-$total =0;
-$_SESSION["Page_NO"]=1;
-$_SESSION["Bal"]=0;
-$_SESSION["Bill"]=0;
-$conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
-foreach($_POST as $x => $x_value) {
-$temp = str_replace("_"," ","$x");
+                    <h2 class="title">Enter User Name</h2>
+                    <form name="Add_Item" method="post" action="">
+					<div class="message"><?php if($message!="") { echo $message; } ?></div>
 
-$age[$temp] = $x_value;
-}
-foreach($age as $x => $x_value) {
-//echo "Key=" . $x . ", Value=" . $x_value;
-$result = mysqli_query($conn," select price  from food_items  where item_name='" . $x . "'");
-echo "<center>";
-  $_SESSION["delivery_add"]="na";
-while($row = mysqli_fetch_assoc($result))
-{
-  $cost=$row["price"];
-  $total  = $total + ( intval($cost) * intval($x_value));
-}
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">User Name</label>
+                                    <input class="input--style-4" type="text"name="Faculty_name" required>
+                                </div>
+                            </div>
 
-if($x =='delivery')
-{
-  $_SESSION["delivery_add"]=$x_value;
-}
-}
-$_SESSION["order_details"] = $age;
-$_SESSION["total_bill"] = $total;
-echo "total for the amount is  $total ";
-echo "<br>";
-$temp;
-	$result = mysqli_query($conn," select credit_amount from user where username= '" . $_SESSION["userid"] . "' ");
-  if (mysqli_num_rows($result) > 0) {
-
-    while($row = mysqli_fetch_assoc($result)) {
-        echo " The current balance is " . $row["credit_amount"]. " ";
-		echo "<br>";
-		echo "<br>";
-
-        $temp = $row["credit_amount"];
-		if($temp < $total)
-		{
-        $_SESSION["Bal"]=$row["credit_amount"];
-        $_SESSION["Bill"]=$total;
-        header("Location: /dbms/unsuccessful.php");
-		}
-
-    }
-
-
-}
- ?>
-					
-                        
-                        
-                        
-                        <div class="p-t-15">
-                          <a href ="successful.php">  <button class="btn btn--radius-2 btn--blue" >Confirm</button></a> &nbsp
-							<a href='order.php'><button class="btn btn--radius-2 btn--blue" >Go Back</button></a>
                         </div>
-                   
+
+
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit" value="Submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

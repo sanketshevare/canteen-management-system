@@ -1,5 +1,28 @@
 <?php
-session_start();
+
+
+$message="";
+if(count($_POST)>0) {
+	$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
+		if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+	$a=$_POST['Item_Id'];
+	$sql="select * from food_items  where item_name='$a' ";
+	$result = mysqli_query($conn,$sql);
+	$row=mysqli_num_rows($result);
+
+	if ($row ==0)
+ {
+		$message = "invalid item name\\nTry again.";
+		echo "<script type='text/javascript'>alert('$message');</script>";
+
+	}
+
+	$sql="delete from food_items  where item_name='$a' ";
+	$result = mysqli_query($conn,$sql);
+}
 ?>
 
 
@@ -36,56 +59,32 @@ session_start();
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    
+                    <h2 class="title">Enter Item Details</h2>
                     <form name="Add_Item" method="post" action="">
-					
+					<div class="message"><?php if($message!="") { echo $message; } ?></div>
                         <div class="row row-space">
-                           <?php
-
-
-$message="";
-
-	$conn = mysqli_connect("localhost","root","","canteen_delivery_system");
-		if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
-	$result = mysqli_query($conn," select credit_amount from user where username= '" . $_SESSION["userid"] . "' ");
-
-	if (mysqli_num_rows($result) > 0) {
-
-    while($row = mysqli_fetch_assoc($result)) {
-        echo " The current balance is " . $row["credit_amount"]. " ";
-    }
-} else {
-    echo "0 results";
-}
-
-
-?>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Item Name</label>
+                                    <input class="input--style-4" type="text" name="Item_Id" required>
+                                </div>
                             </div>
-                            
+
                         </div>
-                        
-                        
-                        
+
+
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit" value="Submit">Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Jquery JS-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
-
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
+   
+    
 
 
 
 </html>
-<!-- end document-->
