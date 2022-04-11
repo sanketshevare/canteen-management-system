@@ -46,15 +46,49 @@
                 height: auto;
             }
         }
-        .container-fluid{
-            background-color:bisque;
+
+        .container-fluid {
+            background-color: bisque;
         }
+
+        .links {
+            height: 90vh;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+        }
+
+        #menu1 {
+            background-image: url("../assets/menu.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
+
+        p {
+            font-size: 20px;
+            font-family: "Times New Roman", Times, serif;
+            color: #fff;
+            border: 2px solid red;
+            padding: 10px;
+            background-color: #555;
+            text-align: center;
+            text-shadow: 2px 2px 4px #000000;
+            border-radius: 5px;
+            text-decoration: none;
+            
+        }
+      
     </style>
 </head>
 
 <body>
 
-  
+
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -63,14 +97,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="" href="#"><img src="../assets/logo.jpg" /></a>
             </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
+            <div class=" navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="" >Home</a></li>
+                    <li class="active"><a href="">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Projects</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="../navbar/contact.php" target="main">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="../signin/index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -79,11 +113,10 @@
         </div>
     </nav>
 
-    <div class="container-fluid text-center">
-        <div class="row content">
-            <div class="col-sm-2 sidenav" style="background-color:red;">
-                <p><a href="../orders/list_items.php">Menu</a></p>
-                <p><a href="../orders/order.php">Order</a></p>
-                <p><a href="../orders/order_details.php">Order Details</a></p>
+    <div class="text-center">
+        <div class="links">
+            <div class="col-sm-2 sidenav" id="menu1">
+                <p><a href="../orders/list_items.php" style="text-decoration: none; color: #fff;">Menu</a></p>
+                <p><a href="../orders/order.php" style="text-decoration: none; color: #fff;">Order</a></p>
+                <p><a href="../orders/order_details.php" style="text-decoration: none; color: #fff;" >Order Details</a></p>
             </div>
-           

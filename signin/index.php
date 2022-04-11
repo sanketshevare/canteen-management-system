@@ -28,12 +28,12 @@ session_start();
       width: 30%;
       height: 100%;
       border-radius: 10px;
-      box-shadow: 0px 0px 10px 0px #000;
-      background-color: #3edbf0;
+      box-shadow: 0px 0px 20px 0px #000;
+     
       margin-top: 50px;
       margin-bottom: 50px;
       padding: 20px;
-
+      opacity: 1.0;
 
     }
 
@@ -50,7 +50,7 @@ session_start();
       width: 80%;
       height: 30px;
       border-radius: 25px;
-      border: 1px solid #ccc;
+      border: 1px solid red;
       padding-left: 20px;
       font-size: 16px;
       margin-top: 20px;
@@ -65,6 +65,7 @@ session_start();
       text-align: center;
       font-size: 30 px;
       font-family: 'Roboto', sans-serif;
+      color: lightblue;
     }
 
     span {
@@ -80,7 +81,7 @@ session_start();
     .main input[type="text"],
     input[type="password"] {
       border: none;
-      border: 2px solid #f00;
+      border: 1px solid red;
       background-color: #fff;
       border-radius: 5px;
       padding: 10px;
@@ -111,17 +112,16 @@ session_start();
       text-decoration: none;
       font-size: 18px;
       line-height: 25px;
-      color: red;
+      color: #fb2525
 
     }
 
     .main a:hover {
-      color: green;
+      color: yellow;
     }
   </style>
 </head>
-
-<body background="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrUYyWDd0dJ2875gcxIpn6y_ZwM-FK9RB28A&usqp=CAU">
+<body background="../assets/login.jpg">
   <div class="main">
 
 
@@ -137,11 +137,11 @@ session_start();
 
       <input type="password" id="password" name="password" placeholder="Password" autocomplete="off" title="It must contain 8 characters containing atleast one lowercase, one uppercase and one number" required>
       <br><br>
-      <a style=" margin-left: 40px" ; href="#"> Forgot Password? </a>
+      <a style=" margin-left: 40px " ; href="./forgotpass/forgotpassword.php"> Forgot Password? </a>
       <br />
       <input type="submit" value="Sign In" name="submit">
       <br><br>
-      <span>Don't have an account? <a href="../signup/signup.php">Sign Up</a> </span>
+      <span style="color:aliceblue;">Don't have an account? <a href="../signup/signup.php" style="color: lightgreen;">Sign Up</a> </span>
 
 
 

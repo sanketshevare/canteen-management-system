@@ -40,6 +40,12 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        img{
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+        }
     </style>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -54,7 +60,8 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Logo</a>
+               
+               <a> <img src=".././assets/logo.jpg" alt=""/></a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="dropdown">

@@ -52,21 +52,91 @@ if(count($_POST)>0) {
 
     <!-- Main CSS-->
     <link href="css/main.css" rel="stylesheet" media="all">
+
+    <style>
+        .div1 {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            background-color: #ccc;
+        }
+
+        .div2 {
+
+            background-image: url("../assets/item.jpg");
+            height: 80vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 20px;
+            opacity: 0.9;
+            width: 300px;
+
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 100%;
+            text-align: center;
+            font-family: arial;
+        }
+
+        input {
+            width: 80%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        .title {
+            font-size: 25 px;
+            font-family: "Times New Roman", Times, serif;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 50%;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 20px;
+            font-family: "Times New Roman", Times, serif;
+            font-weight: bold;
+
+        }
+    </style>
 </head>
 
 <body>
-    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-        <div class="wrapper wrapper--w680">
-            <div class="card card-4">
-                <div class="card-body">
-                    <h2 class="title">Enter Item Details</h2>
-                    <form name="Add_Item" method="post" action="">
+    <div class="div1">
+        <div class="div2">
+            <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+                <div class="wrapper wrapper--w680">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="title">Enter Item Details</h2>
+                            <form name="Add_Item" method="post" action="">
 					<div class="message"><?php if($message!="") { echo $message; } ?></div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Item Name</label>
-                                    <input class="input--style-4" type="text" name="Item_Id" required>
+                                    <input class="input--style-4" type="text" name="Item_Id" required placeholder="Enter item name to remove">
                                 </div>
                             </div>
 
@@ -77,14 +147,55 @@ if(count($_POST)>0) {
                             <button class="btn btn--radius-2 btn--blue" type="submit" value="Submit">Submit</button>
                         </div>
                     </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <div>
+            <h2>Available Items in Menu</h2>
+        <marquee behavior="scroll" direction="up" style="text-align: center;">
+
+            <?php
+
+            $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            $sql = "SELECT * FROM food_items";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    echo " <p>" . $row["item_name"] . " -" . $row["price"] . " Rs</p>";
+                }
+            }
+             else {
+                echo "0 results";
+            }
+            $conn->close();
+
+            ?>
+ </marquee>
+        </div>
+       
     </div>
 
-   
-    
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
 
 
 
 </html>
+<!-- end document-->
+
+

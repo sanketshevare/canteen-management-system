@@ -1,11 +1,11 @@
-
 <html lang="en" dir="ltr">
 
 <head>
- 
+
 
   <style>
     body {
+      height: 97vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -19,15 +19,15 @@
     .main {
 
 
-      
+
       width: 30%;
-      height: 80%;
+      height: 90%;
       border-radius: 10px;
-      box-shadow: 0px 0px 10px 0px #000;
-      background-color: #3edbf0;
+      box-shadow: 0px 0px 20px 0px #000;
       margin-top: 50px;
       margin-bottom: 50px;
       padding: 20px;
+      opacity: 0.9;
 
 
     }
@@ -52,26 +52,31 @@
     }
 
 
-  
-    h1 ,h2{
+
+    h1,
+    h2 {
       margin: 0;
       padding: 0 0 20px;
       text-align: center;
       font-size: 30 px;
       font-family: 'Roboto', sans-serif;
+      color: lime;
+
     }
-  span {
-      
+
+    span {
+
       font-size: 20px;
-      display: table ;
+      display: table;
       font-size: 18px;
       font-family: 'Roboto', sans-serif;
       margin-left: auto;
-    margin-right: auto;
-}
+      margin-right: auto;
+    }
+
     .main input[type="text"],
     input[type="password"],
-     input[type="email"] {
+    input[type="email"] {
       border: none;
       border: 2px solid #f00;
       background-color: #fff;
@@ -104,41 +109,72 @@
       text-decoration: none;
       font-size: 18px;
       line-height: 25px;
-      color: red;
-     
+      color: royalblue;
+      font-weight: bold;
+
     }
 
     .main a:hover {
       color: green;
     }
+
+
+
+    .dropdown {
+      left: calc(40% - 156px);
+      padding: 10px;
+      width: 80%;
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+      border: 2px solid #f00;
+      background-color: #fff;
+      font-size: medium;
+    }
   </style>
 </head>
 
-<body background="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrUYyWDd0dJ2875gcxIpn6y_ZwM-FK9RB28A&usqp=CAU">
-  
+<body background="../assets/reg1.jpg">
 
-<div class="main">
+
+  <div class="main">
     <form class="" action="#" method="post">
 
       <h1> Canteen Management System </h1>
       <br />
-    <h2>Register</h2>
-     
+      <h2>Register</h2>
+
       <input type="text" id="username" name="username" placeholder="Username" autocomplete="on" title="It must be alphanumeric of length 5-15" autofocus required>
       <br><br>
       <input type="email" id="email" name="email" placeholder="example@gmail.com" autocomplete="on" title="Email" autofocus required>
-<br><br>
-      
+      <br><br>
+
       <input type="password" id="password" name="password" placeholder="Password" autocomplete="off" title="It must contain 8 characters containing atleast one lowercase, one uppercase and one number" required>
       <br><br>
-      
+
+
+      <select name="security_question" id="security_question" class="dropdown" required>
+        <option value="" disabled selected>Select security question</option>
+        <option value="What is your previous school name?">What is your previous school name?</option>
+        <option value="What is your nickname?">What is your nickname?</option>
+        <option value="Who is your favourite actor?">Who is your favourite actor?</option>
+      </select>
+      <br><br>
+      <input type="text" name="answer" placeholder="Enter your answer">
+
+      <br><br>
+
+
+
+
       <input type="submit" value="Register" name="submit">
-      <br><br>  
-      <span>Already have an account?   <a href="../signin/index.php">Sign In</a> </span>
+      <br><br>
+      <span><b>Already have an account? </b><a href="../signin/index.php">Sign In</a> </span>
 
     </form>
-    </div>
-  
+  </div>
+
+
 
 
 
@@ -155,38 +191,40 @@ if (count($_POST) > 0) {
   }
   if (isset($_REQUEST['username'])) {
 
-$username = stripslashes($_REQUEST['username']);
-$username = mysqli_real_escape_string($con, $username);
-$email    = stripslashes($_REQUEST['email']);
-$email    = mysqli_real_escape_string($con, $email);
-$password = stripslashes($_REQUEST['password']);
-$password = mysqli_real_escape_string($con, $password);
+    $username = stripslashes($_REQUEST['username']);
+    $username = mysqli_real_escape_string($con, $username);
+    $email    = stripslashes($_REQUEST['email']);
+    $email    = mysqli_real_escape_string($con, $email);
+    $password = stripslashes($_REQUEST['password']);
+    $password = mysqli_real_escape_string($con, $password);
+    $security_question = $_POST['security_question'];
+    $answer = $_POST['answer'];
 
-$query    = "INSERT into `user` (username, password, email, type)
-             VALUES ('$username', '$password', '$email' , 0)";
+    $query    = "INSERT into `user` (username, password, email, type, security_question, answer)
+             VALUES ('$username', '$password', '$email' , 0, '$security_question', '$answer')";
 
 
-$sql = "SELECT * FROM `user` WHERE username='$username' or email='$email'";
-//$sql1 = "SELECT * FROM `user` WHERE email='$email'";
+    $sql = "SELECT * FROM `user` WHERE username='$username' or email='$email'";
+    //$sql1 = "SELECT * FROM `user` WHERE email='$email'";
 
-$res = mysqli_query($con, $sql);
-//$res1 = mysqli_query($con, $sql1);
+    $res = mysqli_query($con, $sql);
+    //$res1 = mysqli_query($con, $sql1);
   }
 }
 
 if (mysqli_num_rows($res) > 0) {
-    echo "<script>alert('Username or Email already exists')</script>";
-    } else {
-    if (mysqli_query($con, $query)) {
-        echo "<script>alert('User Registered Successfully')</script>";
-    } 
+  echo "<script>alert('Username or Email already exists')</script>";
+} else {
+  if (mysqli_query($con, $query)) {
+    echo "<script>alert('User Registered Successfully')</script>";
+  }
 }
 // } else {
 $result =  mysqli_query($con, $query);
 // }
 
 if ($result) {
-   echo "<script>alert('User Registered Successfully')</script>";
-    header("Location: ../signin/index.php");
-} 
+  echo "<script>alert('User Registered Successfully')</script>";
+  header("Location: ../signin/index.php");
+}
 ?>

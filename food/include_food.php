@@ -20,12 +20,17 @@ $result = mysqli_query($conn, "SELECT * FROM food_items ");
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  background: #4272d7;
+  background: #6c4079;
 		}
 		.button:hover{
 			background: #3868cd;
 		}
-</style>
+
+    .d{
+      background-color: #fbc2eb;
+
+    }
+    </style>
 </head>
 <body style="background: -webkit-gradient(linear, left bottom, left top, from(#fbc2eb), to(#a18cd1));
   background: -webkit-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
@@ -41,17 +46,19 @@ $result = mysqli_query($conn, "SELECT * FROM food_items ");
 <form action="./include.php" method='post'>
 <fieldset style="border:solid 5px ; ">
 
-  <legend style="align:center">Items Available</legend>
+  <legend style="text-align:center; font-size: large;">Items Available</legend>
+  <div class="d">
 <?php
 $i=0;
 while($row = mysqli_fetch_array($result)) {
 ?>
 
-  <div style="float:bottom;  margin-top:50px; margin-left:50px"><input type="checkbox" name="<?=$row["item_name"];?>"  > <?=$row["item_name"];?> <br></div>
+  <div style="float:bottom;  margin-top:50px; margin-left:50px"><input type="checkbox" name="<?=$row["item_name"];?>"  > <span style="font-size: 20px;"><?=$row["item_name"];?> <span></p><br></div>
 <?php
 $i++;
 }
 ?>
+  </div>
 <br>
 <br>
 <center><button type="submit" class="button"> submit  </submit>
