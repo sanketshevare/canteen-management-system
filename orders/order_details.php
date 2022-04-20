@@ -1,7 +1,24 @@
 <?php
 include("../signin/navigation2.php");
+// include("../db.php");
+ // include("../db.php");
+ $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+ // Check connection
+ if ($conn->connect_error) {
+   die("Connection failed: " . $conn->connect_error);
+ }
 
-session_start();
+
+
+$userid = $_SESSION['userid'];
+ echo $userid;
+
+
+$stmt = $conn->prepare("INSERT INTO order_details (username,item_name,item_qty,total_bill) VALUES (?,?,?,?)");
+$stmt->bind_param("ssii",$userid,$_POST['item_name'],$_POST['quantity'],$_POST['total_bill']);
+$stmt->execute();
+
+
 ?>
 
 <html>
@@ -49,21 +66,19 @@ text-align: left;
       <tr>
         <th>Item_name</th>
         <th>QTY</th>
+        <th>BILL</th>
         <th>Time</th>
       </tr>
       <?php
-      $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
-      // Check connection
-      if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-      }
-      $sql = "SELECT *  FROM order_details where Status='0' and username= '" . $_SESSION["userid"] . "' ";
+     
+    
+      $sql = "SELECT *  FROM order_details where username= '$userid' ";
       $result = $conn->query($sql);
-      if ($result->num_rows > 0) {
+      if ($result->num_rows >= 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
           $temp1 = substr($row["timestamp"], 11, 9);
-          echo "<tr><td>" . $row["item_name"] . "</td><td>" . $row["item_qty"] . "</td><td>" . $temp1 . "</td>";
+          echo "<tr><td>" . $row["item_name"] . "</td><td>" . $row["item_qty"] ."</td><td>" . $row['total_bill'] . "</td><td>" . $temp1 . "</td>";
         }
         echo "</table>";
       } else {
@@ -80,23 +95,26 @@ text-align: left;
       <tr>
         <th>Item_name</th>
         <th>QTY</th>
+        <th>BILL</th>
         <th>Time</th>
         <th>Date </th>
       </tr>
       <?php
-      $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
+      $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
       // Check connection
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
       }
-      $sql = "SELECT *  FROM order_details where username= '" . $_SESSION["userid"] . "' ";
+
+     
+      $sql = "SELECT *  FROM order_details where username= '$userid'";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
           $temp1 = substr($row["timestamp"], 11, 9);
           $temp2 = substr($row["timestamp"], 0, 10);
-          echo "<tr><td>" . $row["item_name"] . "</td><td>" . $row["item_qty"] . "</td><td>" . $temp1 . "</td><td>" . $temp2 . "</td>";
+          echo "<tr><td>" . $row["item_name"] . "</td><td>" . $row["item_qty"] . "</td><td>" . $row['total_bill'] . "</td><td>". $temp1 . "</td><td>" . $temp2 . "</td>";
         }
         echo "</table>";
       } else {

@@ -1,4 +1,5 @@
 <?php
+include("../signin/navigation3.php");
 
 
 $message = "";
@@ -76,7 +77,7 @@ if (count($_POST) > 0) {
             margin-bottom: 10px;
             padding: 20px;
             opacity: 0.9;
-            width: 300px;
+            width: 350px;
 
         }
 
@@ -97,6 +98,7 @@ if (count($_POST) > 0) {
             border: 1px solid #ccc;
             box-sizing: border-box;
             border-radius: 5px;
+            margin-left: 35 %;
         }
 
         .title {

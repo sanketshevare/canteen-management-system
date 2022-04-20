@@ -174,15 +174,18 @@ if (count($_POST) > 0) {
   $result1 = mysqli_query($conn, "SELECT * FROM user WHERE username='" . $_POST["userName"] . "' and password = '" . $_POST["password"] . "' and type = '1' ");
   $count  = mysqli_num_rows($result);
   $count1  = mysqli_num_rows($result1);
+
+  $_SESSION["userid"] = $_POST["userName"];
+  // echo  $_SESSION["userid"];
   if ($count == 0) {
     $message = "Invalid Username or Password!";
   } else {
     $message = "You are successfully authenticated!";
-    $_SESSION["userid"] = $_POST["userName"];
-    header("Location: ./admin.html");
+   
+    header("Location: ./user.html");
   }
   if ($count1 == 0)
-    header("Location: ./user.html");
+  $message = "Invalid Username or Password!";
   else {
     header("Location: ./admin.html");
   }

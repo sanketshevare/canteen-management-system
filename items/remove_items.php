@@ -1,27 +1,25 @@
 <?php
+include("../signin/navigation3.php");
 
 
-$message="";
-if(count($_POST)>0) {
-	$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
-		if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
-	$a=$_POST['Item_Id'];
-	$sql="select * from food_items  where item_name='$a' ";
-	$result = mysqli_query($conn,$sql);
-	$row=mysqli_num_rows($result);
+$message = "";
+if (count($_POST) > 0) {
+    $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+    $a = $_POST['Item_Id'];
+    $sql = "select * from food_items  where item_name='$a' ";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_num_rows($result);
 
-	if ($row ==0)
- {
-		$message = "invalid item name\\nTry again.";
-		echo "<script type='text/javascript'>alert('$message');</script>";
+    if ($row == 0) {
+        $message = "invalid item name\\nTry again.";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+    }
 
-	}
-
-	$sql="delete from food_items  where item_name='$a' ";
-	$result = mysqli_query($conn,$sql);
+    $sql = "delete from food_items  where item_name='$a' ";
+    $result = mysqli_query($conn, $sql);
 }
 ?>
 
@@ -64,7 +62,8 @@ if(count($_POST)>0) {
         .div2 {
 
             background-image: url("../assets/item.jpg");
-            height: 80vh;
+            height: 76vh;
+
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -73,7 +72,7 @@ if(count($_POST)>0) {
             margin-bottom: 10px;
             padding: 20px;
             opacity: 0.9;
-            width: 300px;
+            width: 350px;
 
         }
 
@@ -85,13 +84,15 @@ if(count($_POST)>0) {
         }
 
         input {
-            width: 80%;
+            width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
             display: inline-block;
             border: 1px solid #ccc;
             box-sizing: border-box;
             border-radius: 5px;
+            margin-left: 25%;
+
         }
 
         .title {
@@ -120,6 +121,30 @@ if(count($_POST)>0) {
             font-weight: bold;
 
         }
+
+        .scroller {
+            background-image: url("https://www.foodiesfeed.com/wp-content/uploads/2019/04/mae-mu-oranges-ice-819x1024.jpg.webp");
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 350px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 20px;
+            opacity: 0.9;
+            width: 350px;
+            text-decoration: solid;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: large;
+            color: #000;
+            word-wrap: normal;
+
+
+
+        }
     </style>
 </head>
 
@@ -132,70 +157,59 @@ if(count($_POST)>0) {
                         <div class="card-body">
                             <h2 class="title">Enter Item Details</h2>
                             <form name="Add_Item" method="post" action="">
-					<div class="message"><?php if($message!="") { echo $message; } ?></div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <input class="input--style-4" type="text" name="Item_Id" required placeholder="Enter item name to remove">
+                                <div class="message"><?php if ($message != "") {
+                                                            echo $message;
+                                                        } ?></div>
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <input class="input--style-4" type="text" name="Item_Id" required placeholder="Enter item name to remove">
+                                        </div>
+                                    </div>
+
                                 </div>
-                            </div>
-
-                        </div>
 
 
-                        <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit" value="Submit">Submit</button>
-                        </div>
-                    </form>
+                                <div class="p-t-15">
+                                    <button class="btn btn--radius-2 btn--blue" type="submit" value="Submit">Submit</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div>
-            <h2>Available Items in Menu</h2>
-        <marquee behavior="scroll" direction="up" style="text-align: center;">
 
-            <?php
+        <div class="scroller">
+            <h2 style="text-align: center;">Available Items in Menu</h2>
+            <marquee behavior="scroll" direction="up" style="text-align: center;">
 
-            $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            $sql = "SELECT * FROM food_items";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    echo " <p>" . $row["item_name"] . " -" . $row["price"] . " Rs</p>";
+                <?php
+
+                $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
                 }
-            }
-             else {
-                echo "0 results";
-            }
-            $conn->close();
+                $sql = "SELECT * FROM food_items";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        echo " <p>" . $row["item_name"] . " -" . $row["price"] . " Rs</p>";
+                    }
+                } else {
+                    echo "0 results";
+                }
+                $conn->close();
 
-            ?>
- </marquee>
+                ?>
+            </marquee>
         </div>
-       
+
     </div>
-
-    <!-- Jquery JS-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
-
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
 
 
 
 </html>
 <!-- end document-->
-
-

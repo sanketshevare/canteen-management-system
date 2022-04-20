@@ -1,4 +1,6 @@
 <?php
+include("../signin/navigation3.php");
+
 
 
 $message="";
@@ -36,18 +38,17 @@ if(count($_POST)>0) {
 
 <head><style>
       
-      .div1 {
-          display: flex;
+
+
+      .div2 {
+        display: flex;
           flex-direction: row;
           justify-content: center;
           align-items: center;
-          background-color: #ccc;
-      }
-
-      .div2 {
+    
 
           background-image: url("../assets/user1.jpg");
-          height: 80vh;
+          height: 88vh;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -57,6 +58,7 @@ if(count($_POST)>0) {
           padding: 20px;
           opacity: 0.9;
           width: 100%;
+          
 
       }
 
@@ -68,12 +70,14 @@ if(count($_POST)>0) {
       }
 
       input {
-          width: 30%;
+          width: 100%;
           padding: 15px 20px;
           display: inline-block;
           border: 1px solid #ccc;
           box-sizing: border-box;
           border-radius: 5px;
+          margin-left: 10%;
+         
       }
 
       .title {
@@ -91,7 +95,7 @@ if(count($_POST)>0) {
           padding: 14px 20px;
           border: none;
           cursor: pointer;
-          width: 20%;
+          width: 70%;
           border-radius: 5px;
           margin-top: 20px;
       }

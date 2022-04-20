@@ -1,15 +1,21 @@
 <?php
 
 
-$message = "";
-if (count($_POST) > 0) {
-    $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
-    if (mysqli_connect_errno()) {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    }
-    $result = mysqli_query($conn, " insert into user (username,password ,type,email) values ('" . $_POST["username"] . "','" . $_POST["password"] . "','" . $_POST["privilage"] . "','" . $_POST["email"] . "')");
-}
+$message="";
 
+	$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
+		if (mysqli_connect_errno())
+
+		$result = mysqli_query($conn," insert into user (username,password ,email,type) values ('" . $_POST["username"] . "','" . $_POST["password"] . "','" . $_POST["privilage"] . "','" . $_POST["email"] . "')");
+
+        if($result)
+        {
+            $message = "User added successfully";
+        }
+        else
+        {
+            $message = "Error adding user";
+        }
 ?>
 
 <!DOCTYPE html>

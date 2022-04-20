@@ -1,3 +1,12 @@
+<?php
+include("./config/db.php");
+
+session_start();
+$userid = $_SESSION['userid'];
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,9 +89,26 @@
             text-shadow: 2px 2px 4px #000000;
             border-radius: 5px;
             text-decoration: none;
+
+        }
+        .amt
+        {
+            font-size: 20px;
+            font-family: "Times New Roman", Times, serif;
+            color: #fff;
+            border: 2px solid red;
+            padding: 22px;
+            background-color: orange;
+            text-align: center;
+            text-shadow: 2px 2px 4px #fff;
+            
+            text-decoration: none;
+            margin-left: 20%;
+            font-weight: bold;
+            color: #000000;
+           
             
         }
-      
     </style>
 </head>
 
@@ -105,11 +131,23 @@
                     <li><a href="#">About</a></li>
                     <li><a href="#">Projects</a></li>
                     <li><a href="../navbar/contact.php" target="main">Contact</a></li>
+                    
+                       
+                    
                 </ul>
+                
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="../signin/index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
+                <?php $sql = "SELECT credit_amount FROM user WHERE credit_amount>100 and username = '$userid' ";
+                        $result1 = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result1);
+                        $credit_amount = $row['credit_amount'];
+                        echo "<span class='amt'> Available Balance is: $credit_amount/- </span>";
+                        ?>
+
             </div>
+
         </div>
     </nav>
 
@@ -118,5 +156,5 @@
             <div class="col-sm-2 sidenav" id="menu1">
                 <p><a href="../orders/list_items.php" style="text-decoration: none; color: #fff;">Menu</a></p>
                 <p><a href="../orders/order.php" style="text-decoration: none; color: #fff;">Order</a></p>
-                <p><a href="../orders/order_details.php" style="text-decoration: none; color: #fff;" >Order Details</a></p>
+                <p><a href="../orders/order_details.php" style="text-decoration: none; color: #fff;">Order Details</a></p>
             </div>

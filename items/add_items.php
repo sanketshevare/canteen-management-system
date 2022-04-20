@@ -1,4 +1,5 @@
 <?php
+include("../signin/navigation3.php");
 
 $message = "";
 if (count($_POST) > 0) {
@@ -49,12 +50,13 @@ if (count($_POST) > 0) {
             flex-direction: row;
             justify-content: space-around;
             background-color: #ccc;
+           
         }
 
         .div2 {
 
             background-image: url("../assets/item.jpg");
-            height: 80vh;
+            height: 76vh;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -63,7 +65,8 @@ if (count($_POST) > 0) {
             margin-bottom: 10px;
             padding: 20px;
             opacity: 0.9;
-            width: 300px;
+            width: 350px;
+            
 
         }
 
@@ -72,16 +75,20 @@ if (count($_POST) > 0) {
             width: 100%;
             text-align: center;
             font-family: arial;
+            
+            
+            
         }
 
         input {
-            width: 80%;
+            width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
             display: inline-block;
             border: 1px solid #ccc;
             box-sizing: border-box;
             border-radius: 5px;
+            margin-left: 25%;
         }
 
         .title {
@@ -108,6 +115,31 @@ if (count($_POST) > 0) {
             font-size: 20px;
             font-family: "Times New Roman", Times, serif;
             font-weight: bold;
+
+        }
+
+        .scroller{
+            background-image: url("https://www.foodiesfeed.com/wp-content/uploads/2019/04/mae-mu-oranges-ice-819x1024.jpg.webp");
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 350px;
+            height: 76vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 20px;
+            opacity: 0.9;
+            width: 350px;
+            text-decoration: solid;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: large;
+            color: #000;
+            word-wrap: normal;
+                
+
 
         }
     </style>
@@ -152,8 +184,8 @@ if (count($_POST) > 0) {
             </div>
         </div>
         
-        <div>
-            <h2>Available Items in Menu</h2>
+        <div class="scroller">
+            <h2 style="text-align: center;">Available Items in Menu</h2>
         <marquee behavior="scroll" direction="up" style="text-align: center;">
 
             <?php
@@ -182,15 +214,7 @@ if (count($_POST) > 0) {
        
     </div>
 
-    <!-- Jquery JS-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
-
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
+  
 
 
 

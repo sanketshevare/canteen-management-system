@@ -3,6 +3,9 @@
 
 <head>
     <style>
+        .pos{
+            position: sticky;
+        }
         li a,
         .dropbtn {
             display: inline-block;
@@ -46,6 +49,13 @@
             height: 50px;
             border-radius: 25px;
         }
+        body{
+            background-image:url("https://images.pexels.com/photos/842571/pexels-photo-842571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
     </style>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -55,9 +65,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-
+<body >
+  
+<div class="pos">
     <nav class="navbar navbar-default">
+    
         <div class="container-fluid">
             <div class="navbar-header">
                
@@ -67,24 +79,38 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Items</a>
                     <div class="dropdown-content">
-                        <a href="../items/add_items.php" target="main">Add Items</a>
-                        <a href="../items/remove_items.php" target="main">Remove Items</a>
+                        <a href="../items/add_items.php" >Add Items</a>
+                        <a href="../items/remove_items.php" >Remove Items</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Users</a>
                     <div class="dropdown-content">
-                        <a href="../user/add_users.php" target="main">Add Users</a>
-                        <a href="../user/remove_users.php" target="main">Remove Users</a>
+                        <a href="../user/remove_users.php" >Remove Users</a>
                     </div>
                 </li>
-                <li><a href="../add_credits.php" target="main">Add Credits</a></li>
+                <li><a href="../user/add_credits.php" >Add Credits</a></li>
 
-                <li><a href="../food/include_food.php" target="main">Include food</a></li>
-                <li><a href="../status.php" target="main">Order Details</a></li>
+                <li><a href="../food/include_food.php">Include food</a></li>
+                <li><a href="../status.php" >Order Details</a></li>
                 <li style="float:right; margin-left:800px;"><a href="../signin/index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a> </li>
             </ul>
         </div>
     </nav>
+    </div>
+
+    <marquee behavior="scroll" direction="left" scrollamount= "15" style="text-align: center  ;  ">
+ 
+    <div style="display: flex; align-items: center; justify-content: center; ">
+        <h1 
+        style=" background: -webkit-linear-gradient(yellow, red, black);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bolder;
+  text-align: center;
+  "    
+        >Welcome, To Canteen Management System</h1>
+    </div>
+    </marquee>
 
     <?php ?>
