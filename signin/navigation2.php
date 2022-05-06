@@ -5,6 +5,9 @@ session_start();
 $userid = $_SESSION['userid'];
 
 
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -128,9 +131,8 @@ $userid = $_SESSION['userid'];
             <div class=" navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="../navbar/contact.php" target="main">Contact</a></li>
+                    <li><a href="../navbar/about.php">About</a></li>
+                    <li><a href="../navbar/contact.php" >Contact</a></li>
                     
                        
                     
@@ -139,13 +141,7 @@ $userid = $_SESSION['userid'];
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="../signin/index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
-                <?php $sql = "SELECT credit_amount FROM user WHERE credit_amount>100 and username = '$userid' ";
-                        $result1 = mysqli_query($conn, $sql);
-                        $row = mysqli_fetch_assoc($result1);
-                        $credit_amount = $row['credit_amount'];
-                        echo "<span class='amt'> Available Balance is: $credit_amount/- </span>";
-                        ?>
-
+           
             </div>
 
         </div>

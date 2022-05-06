@@ -64,3 +64,26 @@ input[type=submit]:hover {
 </style>
   </form>
 </div>
+
+<?php
+$conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+$firstname = $_REQUEST['firstname'];
+$lastname = $_REQUEST['lastname'];
+ $department = $_REQUEST['department'];
+$subject = $_REQUEST['subject'];
+
+$qur = "INSERT INTO `queries`(`firstName`, `lastName`, `dept`, `message`) VALUES ('$firstname','$lastname','$department','$subject')";
+mysqli_query($conn,$qur);
+if(mysqli_affected_rows($conn)>0)
+{
+  echo "Query submitted successfully";
+}
+else
+{
+  echo "Query not submitted";
+}
+
+?>

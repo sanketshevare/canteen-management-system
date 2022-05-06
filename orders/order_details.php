@@ -11,7 +11,7 @@ include("../signin/navigation2.php");
 
 
 $userid = $_SESSION['userid'];
- echo $userid;
+//  echo $userid;
 
 
 $stmt = $conn->prepare("INSERT INTO order_details (username,item_name,item_qty,total_bill) VALUES (?,?,?,?)");
@@ -24,6 +24,13 @@ $stmt->execute();
 <html>
 <title></title>
 <style>
+  body{
+    background-color: skyblue;
+  }
+h4{
+    text-transform: capitalize;
+    margin-left: 60%;
+  }
   .button:hover {
     background: #3868cd;
   }
@@ -62,23 +69,40 @@ text-align: left;
 <body>
   <div id="div1">
     <table border="1">
-      <caption> Orders </caption>
+      <caption style="text-align: center;"> Orders </caption>
       <tr>
         <th>Item_name</th>
         <th>QTY</th>
         <th>BILL</th>
         <th>Time</th>
+        <th>Status</th>
+
+
       </tr>
       <?php
+     $sql = "SELECT credit_amount FROM user WHERE credit_amount>100 and username = '$userid' ";
+     $result1 = mysqli_query($conn, $sql);
+     $row = mysqli_fetch_assoc($result1);
+     $credit_amount = $row['credit_amount'];
+     echo "<div><h4>Your Available Balance is: $credit_amount</h4></div>";
+      $sql = "SELECT *  FROM order_details where username= '$userid' ORDER BY timestamp DESC";
      
-    
-      $sql = "SELECT *  FROM order_details where username= '$userid' ";
+
       $result = $conn->query($sql);
       if ($result->num_rows >= 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-          $temp1 = substr($row["timestamp"], 11, 9);
-          echo "<tr><td>" . $row["item_name"] . "</td><td>" . $row["item_qty"] ."</td><td>" . $row['total_bill'] . "</td><td>" . $temp1 . "</td>";
+          $temp1 = substr($row['timestamp'], 11, 9);
+          $status = $row['Status'];
+          if($status == 1)
+          {
+            $status = "Ready";
+          }
+          else
+          {
+            $status = "Pending";
+          }
+          echo "<tr><td>" . $row["item_name"] . "</td><td>" . $row["item_qty"] ."</td><td>" . $row['total_bill'] . "</td><td>" . $temp1 . "</td><td>" . $status. "</td>";
         }
         echo "</table>";
       } else {

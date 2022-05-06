@@ -98,7 +98,7 @@ if (count($_POST) > 0) {
             border: 1px solid #ccc;
             box-sizing: border-box;
             border-radius: 5px;
-            margin-left: 35 %;
+            margin-left: 35%;
         }
 
         .title {

@@ -96,26 +96,36 @@ $userid = $_SESSION['userid'];
 
           $item_name = $_POST["item_name"];
           $remaining_credit = $credit_amount - $total_bill;
-          while ($row = mysqli_fetch_array($result)) {
+       
+          while ($row = mysqli_fetch_array($result1)) {
             echo "Item : " . $row['item_name'] . " <br><br>";
             echo "Quantity : $quantity <br><br>";
           }
+         
           echo "<h1>Total Bill: $total_bill</h1>";
           echo "Your Available Credit Amount is: $remaining_credit <br><br>";
 
           $sql = "UPDATE user SET credit_amount = '$remaining_credit' WHERE username = '$userid' ";
-          if ($conn->query($sql) === TRUE) {
-            
+          $conn->query($sql); 
+          $userid = $_SESSION['userid'];
+          echo $userid;
+         
+         
+     //insert username ite_name and quantity into order_details table
+          $sql1 = "INSERT INTO order_details (username, item_name, item_qty, total_bill) VALUES ('$userid', '$item_name', '$quantity', '$total_bill')";
+          if ($conn->query($sql1) === TRUE) {
+           
+          } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
           }
-
-
+         
           ?>
           <center>
             <div class="container">
               <form action="./order_details.php" method="post">
                 <input type="submit" name="ord_confirm" value="Submit" id="ord_confirm">
                 <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
-                <input type="hidden" name="total_bill" value="<?php echo $total_bill; ?>">
+                <input type="hidden" name="total_bill" value="<?php echo $total_bill * $count; ?>">
                 <input type="hidden" name="item_name" value="<?php echo $item_name ?>">
               </form>
 

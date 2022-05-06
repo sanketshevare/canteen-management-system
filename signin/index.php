@@ -178,14 +178,16 @@ if (count($_POST) > 0) {
   $_SESSION["userid"] = $_POST["userName"];
   // echo  $_SESSION["userid"];
   if ($count == 0) {
-    $message = "Invalid Username or Password!";
+    
+  echo "<script>alert('Invalid Username or Password!')</script>";
+
   } else {
     $message = "You are successfully authenticated!";
    
     header("Location: ./user.html");
   }
   if ($count1 == 0)
-  $message = "Invalid Username or Password!";
+  echo "<script>alert('Invalid Username or Password!')</script>";
   else {
     header("Location: ./admin.html");
   }

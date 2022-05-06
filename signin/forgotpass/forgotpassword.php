@@ -67,6 +67,7 @@
             margin-left: calc(40% - 50px);
             margin-top: 20px;
             width: 30%;
+            cursor: pointer;
         }
         .dropdown {
       left: calc(40% - 156px);
@@ -108,7 +109,7 @@
         <form method="post">
       <h1> Forgot Password </h1>
 
-            <input type="text" placeholder="Enter your username" name="username">
+            <input type="text" placeholder="Enter your username" name="username" required>
             <br><br>
 
 
@@ -121,10 +122,10 @@
             </select>
             <br><br>
 
-            <input type="text" placeholder="Enter your answer" name="answer">
+            <input type="text" placeholder="Enter your answer" name="answer" required>
             <br><br>
 
-            <input type="password" placeholder="Enter new password" name="password">
+            <input type="password" placeholder="Enter new password" name="password" required>
             <br><br>
 
 

@@ -92,7 +92,9 @@
                 <li><a href="../user/add_credits.php" >Add Credits</a></li>
 
                 <li><a href="../food/include_food.php">Include food</a></li>
-                <li><a href="../status.php" >Order Details</a></li>
+                <li><a href="../status/status.php" >Order Details</a></li>
+                <li><a href="../user/query.php" >Queries</a></li>
+
                 <li style="float:right; margin-left:800px;"><a href="../signin/index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a> </li>
             </ul>
         </div>

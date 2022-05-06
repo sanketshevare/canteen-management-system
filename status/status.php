@@ -1,8 +1,7 @@
 <?php
 include("../signin/navigation3.php");
-
 $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
-$result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ORDER BY timestamp DESC ");
+$result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ");
 ?>
 <html>
 <head>
@@ -54,7 +53,7 @@ $result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ORDE
 				<table >
 <?php
 $i=0;
-$result = mysqli_query($conn, "SELECT * FROM order_details where Status='0'and d_address LIKE 'n%' ORDER BY timestamp DESC ");
+$result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ORDER BY timestamp DESC ");
 
 while($row = mysqli_fetch_array($result)) {
 ?>
@@ -75,7 +74,7 @@ $i++;
 	<table >
 <?php
 $i=0;
-$result = mysqli_query($conn, "SELECT * FROM order_details where Status='0'and d_address LIKE 'd%' ORDER BY timestamp DESC ");
+$result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ORDER BY timestamp DESC ");
 
 while($row = mysqli_fetch_array($result)) {
 ?>
@@ -153,4 +152,5 @@ $i++;
 
 <?php
 mysqli_close($conn);
+
 ?>

@@ -5,6 +5,10 @@ $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_sys
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+$sql = "SELECT credit_amount FROM user WHERE credit_amount>100 and username = '$userid' ";
+$result1 = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result1);
+$credit_amount = $row['credit_amount'];
 $result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
 
 
@@ -15,6 +19,11 @@ $result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
 
 <head>
   <style>
+    h4 {
+      text-transform: capitalize;
+      margin-left: 70%;
+    }
+
     /* Fitting Inputs Styling */
 
     .form-group {
@@ -78,17 +87,29 @@ $result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
       align-items: center;
       justify-content: center;
       max-height: 100%;
+      width: 100%;
+    }
+    .aspan{
+      font-size: 30px;
+      margin-right: 40%;
     }
   </style>
 </head>
 
 <body>
+
   <div class="container">
+    <?php
+    echo "<div><h4>Your Available Balance is: $credit_amount</h4></div>";
+
+    ?>
     <form action="./confirmation.php" method='post'>
       <fieldset>
-        <legend>Items Available</legend>
+        <span class="aspan">Available Items</span>
+        <br><br>
+        
         <?php
-         
+
         $i = 0;
         while ($row = mysqli_fetch_array($result)) {
 
@@ -100,7 +121,7 @@ $result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
             </div>
             <div class="form-col-8">
               <input type="hidden" name="item_name" value="<?= $row["item_name"]; ?>">
-              <input type="text" name="quantity" value ="0" min="0">
+              <input type="text" name="quantity" value="0" min="0" >
               <input type="hidden" name="price" value="<?= $row["price"]; ?>">
             </div>
           </div>
@@ -111,22 +132,22 @@ $result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
 
         ?>
 
-<center>
-            <style>
-              #order_submit{
-            padding: 10px;
-                  width: auto;
-                  border-radius: 5px;
-                  cursor: pointer;
-                  border: 2px solid black;
-                  margin-right: 17%;
-              }
-              </style>
+        <center>
+          <style>
+            #order_submit {
+              padding: 10px;
+              width: auto;
+              border-radius: 5px;
+              cursor: pointer;
+              border: 2px solid black;
+              margin-right: 17%;
+            }
+          </style>
           <input type="submit" id="order_submit" name="Order Now" value="Order Now">
-         </center>
+        </center>
         <br>
         <br>
- 
+
       </fieldset>
   </div>
   </form>
