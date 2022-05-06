@@ -150,6 +150,8 @@ $result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
 
       </fieldset>
   </div>
+
+
   </form>
 
 

@@ -145,6 +145,28 @@ if (count($_POST) > 0) {
 
 
         }
+        #dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            opacity: 0.9;
+            width: 300px;
+            text-decoration: solid;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: large;
+            color: #000;
+            word-wrap: normal;
+            margin-left: 20px;
+
+        }
+
     </style>
 </head>
 
@@ -160,27 +182,47 @@ if (count($_POST) > 0) {
                                 <div class="message"><?php if ($message != "") {
                                                             echo $message;
                                                         } ?></div>
-                                <div class="row row-space">
+                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <input class="input--style-4" type="text" name="Item_Id" required placeholder="Enter item name to remove">
+                                            <select class="input--style-4" name="Item_Id" required id="dropdown">
+                                                <option value="">Select Item</option>
+                                                <?php
+                                                $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+                                                // Check connection
+                                                if ($conn->connect_error) {
+                                                    die("Connection failed: " . $conn->connect_error);
+                                                }
+                                                $sql = "SELECT * FROM food_items";
+                                                $result = $conn->query($sql);
+                                                if ($result->num_rows > 0) {
+                                                    // output data of each row
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo "<option value='" . $row["item_name"] . "'>" . $row["item_name"] . "</option>";
+                                                    }
+                                                } else {
+                                                    echo "0 results";
+                                                }
+                                                $conn->close();
+                                                ?>
+                                            </select>
                                         </div>
                                     </div>
-
+                                
                                 </div>
-
-
+                        
                                 <div class="p-t-15">
-                                    <button class="btn btn--radius-2 btn--blue" type="submit" value="Submit">Submit</button>
+                                    <button class="btn btn--radius-2 btn--blue" type="submit" value="Submit">Delete</button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="scroller">
+        <!-- <div class="scroller">
             <h2 style="text-align: center;">Available Items in Menu</h2>
             <marquee behavior="scroll" direction="up" style="text-align: center;">
 
@@ -205,9 +247,11 @@ if (count($_POST) > 0) {
 
                 ?>
             </marquee>
-        </div>
+        </div> -->
 
     </div>
+
+    
 
 
 
