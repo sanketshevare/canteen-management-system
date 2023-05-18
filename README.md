@@ -30,24 +30,19 @@ Fork the repository.
 
 Create your branch:
 
-bash
-Copy code
+
 git checkout -b feature/my-feature
 Commit your changes:
 
-bash
-Copy code
+
 git commit -m 'Add some feature'
 Push to the branch:
 
-bash
-Copy code
+
 git push origin feature/my-feature
 Open a pull request.
 
 Please make sure to update tests as appropriate and adhere to the code of conduct.
-
-\
 
 Contact
 If you have any questions or need further assistance, feel free to reach out:
