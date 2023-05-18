@@ -28,7 +28,7 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 
 Fork the repository.
 
-Create your branch:
+Create your Branch:
 
 
 git checkout -b feature/my-feature
