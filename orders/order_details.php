@@ -1,28 +1,49 @@
 <?php
+error_reporting(0);
+
 include("../signin/navigation2.php");
 // include("../db.php");
  // include("../db.php");
- $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+ $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
  // Check connection
  if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
  }
 
+  
+  
 
 
 $userid = $_SESSION['userid'];
 //  echo $userid;
 
 
-$stmt = $conn->prepare("INSERT INTO order_details (username,item_name,item_qty,total_bill) VALUES (?,?,?,?)");
-$stmt->bind_param("ssii",$userid,$_POST['item_name'],$_POST['quantity'],$_POST['total_bill']);
-$stmt->execute();
+// $stmt = $conn->prepare("INSERT INTO order_details (username,item_name,item_qty,total_bill) VALUES (?,?,?,?)");
+// $stmt->bind_param("ssii",$userid,$_POST['item_name'],$_POST['quantity'],$_POST['total_bill']);
+// $stmt->execute();
 
 
+// $userid = $_SESSION['userid'];
+$result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
+$sql = "SELECT credit_amount FROM user WHERE credit_amount>100 and username = '$userid' ";
+$result1 = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result1);
+$credit_amount = $row['credit_amount'];
+    $total =  $_COOKIE["total"];
+    $item_name = $_COOKIE["item_name"];
+    $qty =  $_COOKIE["qty"];
+      $credit_amount = $credit_amount - $total;
+      $sql = "UPDATE user SET credit_amount = '$credit_amount' WHERE username = '$userid' ";
+          
+  $conn->query($sql); 
+  $userid = $_SESSION['userid'];
+ 
 ?>
-
 <html>
-<title></title>
+  <head>
+  <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
+<title>CMS</title>
 <style>
   body{
     background-color: skyblue;
@@ -159,4 +180,4 @@ text-align: left;
  
 </body>
 
-</html
+</html>

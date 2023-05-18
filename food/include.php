@@ -2,7 +2,7 @@
 session_start();
 $total = 0;
 $_SESSION["Page_NO"] = 1;
-$conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
+$conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
 $result = mysqli_query($conn, " update food_items set include=0 where 1");
 foreach ($_POST as $x => $x_value) {
 	$temp = str_replace("_", " ", "$x");
@@ -25,6 +25,8 @@ foreach ($_POST as $x => $x_value) {
 <html>
 
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
 	<style type="text/css">
 		.button {
 			padding: 10px 20px;

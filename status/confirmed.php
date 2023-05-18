@@ -1,7 +1,7 @@
 <?php
 session_start();
 $total = 0;
-$conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
+$conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
 
 foreach ($_POST as $x => $x_value) {
 
@@ -23,6 +23,8 @@ foreach ($_POST as $x => $x_value) {
 <html>
 
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
 	<style type="text/css">
 		.button {
 			padding: 10px 20px;

@@ -1,5 +1,5 @@
 <?php
-include("./config/db.php");
+//  include("./navigation2.php");
 
 session_start();
 $userid = $_SESSION['userid'];
@@ -15,7 +15,9 @@ $userid = $_SESSION['userid'];
 
 <head>
 
-    <title>Bootstrap Example</title>
+    <title>CMS</title>
+    <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -130,7 +132,7 @@ $userid = $_SESSION['userid'];
             </div>
             <div class=" navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="">Home</a></li>
+                    <li class="active"><a href="../navbar/user-home.php">Home</a></li>
                     <li><a href="../navbar/about.php">About</a></li>
                     <li><a href="../navbar/contact.php" >Contact</a></li>
                     
@@ -149,7 +151,7 @@ $userid = $_SESSION['userid'];
 
     <div class="text-center">
         <div class="links">
-            <div class="col-sm-2 sidenav" id="menu1">
+            <div class="col-sm-2 sidenav " id="menu1">
                 <p><a href="../orders/list_items.php" style="text-decoration: none; color: #fff;">Menu</a></p>
                 <p><a href="../orders/order.php" style="text-decoration: none; color: #fff;">Order</a></p>
                 <p><a href="../orders/order_details.php" style="text-decoration: none; color: #fff;">Order Details</a></p>

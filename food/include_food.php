@@ -1,11 +1,20 @@
 <?php
 include("../signin/navigation3.php");
 
-$conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
+$conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
 $result = mysqli_query($conn, "SELECT * FROM food_items ");
+if($result) {
+  echo "<script> alert('Menu updated successfully')</script>";
+
+}
+else{
+  echo "<script> alert('Something went wrong, Please try again')</script>";
+}
 ?>
 <html>
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
 <style type="text/css">
 .button{
 				display: inline-block;
@@ -46,28 +55,40 @@ $result = mysqli_query($conn, "SELECT * FROM food_items ");
   background: linear-gradient(to top right, #fc2c77 0%, #6c4079 100%);">
 <div style="background-color:white;">
 <form action="./include.php" method='post'>
-<fieldset style="border:solid 5px ; ">
 
-  <legend style="text-align:center; font-size: large;">Items Available</legend>
   <div class="d">
+    
+  <center>
+ 
+<table style="border: 1px solid black; height: 100%; padding: 20px; width: 50%; margin-top: -100px; ">
+<caption>  <legend style="text-align:center; font-size: 22px;; font-weight: bold;">Items Available</legend>
+</caption>
+<th >
+  <tr style="border-bottom: 1px solid black; font-size: 20px; font-weight:bold;">
+    <td style="padding-left: 90px;">Select</td>
+    <td>Item Name</td>
+  </tr>
+</th>
 <?php
 $i=0;
 while($row = mysqli_fetch_array($result)) {
 ?>
 
-  <div style="float:bottom;  margin-top:50px; margin-left:50px"><input type="checkbox" name="<?=$row["item_name"];?>"  > <span style="font-size: 20px;"><?=$row["item_name"];?> <span></p><br></div>
+  <div ><tr style="border-bottom: 1px solid black; "><td style="margin-left: 40px;  "><input type="checkbox" style="height: 30px; width: 20px; margin-left: 100px; " name="<?=$row["item_name"];?>" ></td><td > <span style="font-size: 20px;"><?=$row["item_name"];?> <span></td></tr><br></div>
+  
 <?php
 $i++;
 }
 ?>
-  </div>
+</table>
+</center>
 <br>
 <br>
 <center><button type="submit" class="button"> submit  </submit>
-</fieldset>
 </div>
 </form>
 <br>
+</div>
 
 
 <?php

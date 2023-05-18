@@ -7,6 +7,8 @@ session_start();
 <html lang="en" dir="ltr">
 
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
   <meta charset="utf-8">
 
   <style>
@@ -166,7 +168,7 @@ session_start();
 <?php
 $message = "";
 if (count($_POST) > 0) {
-  $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+  $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
   if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
@@ -184,12 +186,12 @@ if (count($_POST) > 0) {
   } else {
     $message = "You are successfully authenticated!";
    
-    header("Location: ./user.html");
+    header("Location: http://localhost/canteen-management-system-master/navbar/user-home.php");
   }
   if ($count1 == 0)
   echo "<script>alert('Invalid Username or Password!')</script>";
   else {
-    header("Location: ./admin.html");
+    header("Location: ./navigation3.php");
   }
   exit;
 }

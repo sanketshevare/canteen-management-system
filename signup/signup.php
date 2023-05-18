@@ -1,11 +1,16 @@
+
+<?php 
+$err ="";
+?>
 <html lang="en" dir="ltr">
 
 <head>
 
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
 
   <style>
     body {
-      height: 97vh;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -21,7 +26,7 @@
 
 
       width: 30%;
-      height: 90%;
+      height: 100%;
       border-radius: 10px;
       box-shadow: 0px 0px 20px 0px #000;
       margin-top: 50px;
@@ -83,7 +88,6 @@
       border-radius: 5px;
       padding: 20px;
       font-size: 15px;
-      margin-left: 30px;
     }
 
     .main input[type="submit"] {
@@ -94,7 +98,6 @@
       color: #fff;
       font-size: 20px;
       border-radius: 5px;
-      margin-left: calc(40% - 50px);
       margin-top: 20px;
       width: 30%;
     }
@@ -138,40 +141,43 @@
 
 
   <div class="main">
-    <form class="" action="#" method="post">
+  
+   <center>
+   <form class="" action="#" method="post">
 
-      <h1> Canteen Management System </h1>
-      <br />
-      <h2>Register</h2>
+<h1> Canteen Management System </h1>
+<br />
+<h2>Register</h2>
 
-      <input type="text" id="username" name="username" placeholder="Username" autocomplete="on" title="It must be alphanumeric of length 5-15" autofocus required>
-      <br><br>
-      <input type="email" id="email" name="email" placeholder="example@gmail.com" autocomplete="on" title="Email" autofocus required>
-      <br><br>
+<input type="text" id="username" name="username" placeholder="Username" autocomplete="on" title="It must be alphanumeric of length 5-15" autofocus required>
+<br><br>
+<input type="text" id="email" name="email" placeholder="example@gmail.com" autocomplete="on" title="Email" autofocus required>
+<br><br>
 
-      <input type="password" id="password" name="password" placeholder="Password" autocomplete="off" title="It must contain 8 characters containing atleast one lowercase, one uppercase and one number" required>
-      <br><br>
-
-
-      <select name="security_question" id="security_question" class="dropdown" required>
-        <option value="" disabled selected>Select security question</option>
-        <option value="What is your previous school name?">What is your previous school name?</option>
-        <option value="What is your nickname?">What is your nickname?</option>
-        <option value="Who is your favourite actor?">Who is your favourite actor?</option>
-      </select>
-      <br><br>
-      <input type="text" name="answer" placeholder="Enter your answer">
-
-      <br><br>
+<input type="password" id="password" name="password" placeholder="Password" autocomplete="off" title="It must contain 8 characters containing atleast one lowercase, one uppercase and one number" required>
+<br><br>
 
 
+<select name="security_question" id="security_question" class="dropdown" required>
+  <option value="" disabled selected>Select security question</option>
+  <option value="What is your previous school name?">What is your previous school name?</option>
+  <option value="What is your nickname?">What is your nickname?</option>
+  <option value="Who is your favourite actor?">Who is your favourite actor?</option>
+</select>
+<br><br>
+<input type="text" name="answer" placeholder="Enter your answer">
+
+<br><br>
 
 
-      <input type="submit" value="Register" name="submit">
-      <br><br>
-      <span><b>Already have an account? </b><a href="../signin/index.php">Sign In</a> </span>
 
-    </form>
+
+<input type="submit"  value="Register" name="submit">
+<br><br>
+<span><b>Already have an account? </b><a href="../signin/index.php">Sign In</a> </span>
+
+</form>
+   </center>
   </div>
 
 
@@ -185,7 +191,7 @@
 <?php
 
 if (count($_POST) > 0) {
-  $con = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+  $con = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
   if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
@@ -200,6 +206,26 @@ if (count($_POST) > 0) {
     $security_question = $_POST['security_question'];
     $answer = $_POST['answer'];
 
+    $uppercase = preg_match('@[A-Z]@', $password);
+$lowercase = preg_match('@[a-z]@', $password);
+$number    = preg_match('@[0-9]@', $password);
+$specialChars = preg_match('@[^\w]@', $password);
+    $length = strlen($password);
+    
+    
+    if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {  
+      $err = "Invalid Email";
+      echo '<script>alert("Invalid Email");</script>';
+    } elseif((!preg_match ("/^[a-zA-z0-9]*$/", $username))){
+      echo '<script>alert("Invalid Username");</script>';
+
+    }
+    elseif(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+      echo '<script>alert("Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character");</script>';
+
+    }
+    else {
+
     $query    = "INSERT into `user` (username, password, email, type, security_question, answer)
              VALUES ('$username', '$password', '$email' , 0, '$security_question', '$answer')";
 
@@ -209,8 +235,7 @@ if (count($_POST) > 0) {
 
     $res = mysqli_query($con, $sql);
     //$res1 = mysqli_query($con, $sql1);
-  }
-}
+
 
 if (mysqli_num_rows($res) > 0) {
   echo "<script>alert('Username or Email already exists')</script>";
@@ -226,5 +251,8 @@ $result =  mysqli_query($con, $query);
 if ($result) {
   echo "<script>alert('User Registered Successfully')</script>";
   header("Location: ../signin/index.php");
+}
+}
+}
 }
 ?>

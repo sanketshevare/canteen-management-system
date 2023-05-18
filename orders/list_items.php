@@ -1,4 +1,6 @@
 <?php include("../signin/navigation2.php");
+error_reporting(0);
+
  include("../signin/config/db.php");
  ?>
 
@@ -7,6 +9,8 @@
 <html>
 
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
   <title>Table with database</title>
   <style>
     body{
@@ -59,10 +63,16 @@
 
 <body>
   <?php
-  $sql = "SELECT credit_amount FROM user WHERE credit_amount>100 and username = '$userid' ";
+  $sql = "SELECT credit_amount FROM user WHERE credit_amount and username = '$userid' ";
   $result1 = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result1);
   $credit_amount = $row['credit_amount'];
+
+  if($credit_amount ==0){
+    echo "<script>alert('Your Available credits are low please add some credits'); </script>";
+
+
+  }
   echo "<div><h4>Your Available Balance is: $credit_amount</h4></div>";
   ?>
   <div class="container">

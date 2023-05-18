@@ -1,10 +1,12 @@
 <?php
 include("../signin/navigation3.php");
-$conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
+$conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
 $result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ");
 ?>
 <html>
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
 <style type="text/css">
 .button{
 				display: inline-block;
@@ -38,10 +40,12 @@ $result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ");
   background: -moz-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
   background: -o-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
   background: linear-gradient(to top right, #fc2c77 0%, #6c4079 100%);">
-<div style="background-color:white;"><form action="./confirmed.php" method='post'>
+<div style= " background-image: linear-gradient(to bottom right, red, yellow)">
+<center>
+<form action="./confirmed.php" method='post'>
 <fieldset style="border:solid 5px;">
   <legend>Item Orders</legend>
-	<table style="border:solid">
+	<!-- <table style="border:solid">
 		<tr>
 				<th style="border:none;border-right:solid;border-bottom:dashed">N Block </th>
 				<th style="border:none;border-bottom:dashed;">D Block </th>
@@ -50,37 +54,27 @@ $result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ");
 		<tr>
 
 			<td style="border:none; border-right:solid;border-bottom:solid;">
-				<table >
+				<table > -->
+
+
+	<table style="border: 1px solid black; width: 50%; text-align: center">
+  <th>
+   <tr style="text-align: center; font-weight: bold; font-size: 20px;">
+   <td>select</td>
+    <td>username</td>
+    <td>item and quantity</td>
+
+   </tr>
+  </th>
 <?php
 $i=0;
 $result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ORDER BY timestamp DESC ");
 
 while($row = mysqli_fetch_array($result)) {
 ?>
-<tr style="border:none; border-right:solid;">
+<tr style="border: 1px solid black;font-size: 17px;">
 
-  <td style="border:none;border-right: dotted;"><input type="checkbox" name="<?=$row["Order_id"];?>"  > </td><td><?=$row["username"];?></td> <td> <?=$row["item_name"];?></td> <td style="border-right:dotted;"><?=$row["item_qty"];?></td> <td><?=substr($row["d_address"],1,3)?></td>
-
-</tr>
-<?php
-$i++;
-}
-?>
-
-</table>
-</td>
-
-<td style="border-bottom:solid">
-	<table >
-<?php
-$i=0;
-$result = mysqli_query($conn, "SELECT * FROM order_details where Status='0' ORDER BY timestamp DESC ");
-
-while($row = mysqli_fetch_array($result)) {
-?>
-<tr>
-
-	<td style="border:none;border-right: dotted;"><input type="checkbox" name="<?=$row["Order_id"];?>"  > </td><td><?=$row["username"];?></td> <td> <?=$row["item_name"];?></td> <td style="border-right:dotted;"><?=$row["item_qty"];?></td> <td><?=substr($row["d_address"],1,3)?></td>
+	<td style="border:none;border-right: dotted; padding: 10px;"><input type="checkbox" name="<?=$row["Order_id"];?>"  > </td><td style="border:none;border-right: dotted;"><?=$row["username"];?></td> <td> <?=$row["item_name"];?></td> <td style="border-right:dotted; "><?=$row["item_qty"];?></td> 
 
 
 </tr>
@@ -93,60 +87,17 @@ $i++;
 </td>
 </tr>
 <tr>
-		<th style="border:none;border-right:solid;border-bottom:dashed">B Block </th>
-		<th style="border:none;border-bottom:dashed">A Block </th>
 </tr>
-<tr>
-	<td style="border-right:solid">
-		<table >
-<?php
-$i=0;
-$result = mysqli_query($conn, "SELECT * FROM order_details where Status='0'and d_address LIKE 'b%' ORDER BY timestamp DESC ");
 
-while($row = mysqli_fetch_array($result)) {
-?>
-<tr>
-
-	<td style="border:none;border-right: dotted;"><input type="checkbox" name="<?=$row["Order_id"];?>"  > </td><td><?=$row["username"];?></td> <td> <?=$row["item_name"];?></td> <td style="border-right:dotted;"><?=$row["item_qty"];?></td> <td><?=substr($row["d_address"],1,3)?></td>
-
-
-</tr>
-<?php
-$i++;
-}
-?>
-
-</table>
-</td>
-
-<td>
-<table >
-<?php
-$i=0;
-$result = mysqli_query($conn, "SELECT * FROM order_details where Status='0'and d_address LIKE 'a%' ORDER BY timestamp DESC ");
-
-while($row = mysqli_fetch_array($result)) {
-?>
-<tr>
-
-	<td style="border:none;border-right: dotted;"><input type="checkbox" name="<?=$row["Order_id"];?>"  > </td><td><?=$row["username"];?></td> <td> <?=$row["item_name"];?></td> <td style="border-right:dotted;"><?=$row["item_qty"];?></td> <td><?=substr($row["d_address"],1,3)?></td>
-
-<?php
-$i++;
-}
-?>
-
-</table>
-</td>
-</tr>
 </table>
 <br>
 <br>
 <button type="submit" class="button"> Confirm </submit>
 </fieldset>
-</div>
-</form>
 
+</form>
+</center>
+</div>
 <br>
 
 

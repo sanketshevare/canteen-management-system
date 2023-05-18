@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
     <style>
         .pos{
             position: sticky;
@@ -50,10 +52,10 @@
             border-radius: 25px;
         }
         body{
-            background-image:url("https://images.pexels.com/photos/842571/pexels-photo-842571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            background-image:url("https://img.freepik.com/free-photo/big-sandwich-hamburger-with-juicy-beef-burger-cheese-tomato-red-onion-wooden-table_2829-19631.jpg?size=626&ext=jpg&ga=GA1.2.17414822.1684431089&semt=sph");
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: center;
+            /* background-position: center; */
 
         }
     </style>
@@ -65,17 +67,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 
-<body >
+<body  >
   
-<div class="pos">
-    <nav class="navbar navbar-default">
-    
+<nav class="navbar navbar-inverse" style="background-color:cream;">
         <div class="container-fluid">
             <div class="navbar-header">
-               
-               <a> <img src=".././assets/logo.jpg" alt=""/></a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="" href="#"><img src="../assets/logo.jpg" /></a>
             </div>
-            <ul class="nav navbar-nav">
+            <div class=" navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav" >
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Items</a>
                     <div class="dropdown-content">
@@ -95,24 +100,25 @@
                 <li><a href="../status/status.php" >Order Details</a></li>
                 <li><a href="../user/query.php" >Queries</a></li>
 
-                <li style="float:right; margin-left:800px;"><a href="../signin/index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a> </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                    <li><a href="../signin/index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
         </div>
     </nav>
     </div>
 
-    <marquee behavior="scroll" direction="left" scrollamount= "15" style="text-align: center  ;  ">
+    <div style="margin-top: -50px;">
+    <marquee behavior="scroll" direction="left" scrollamount= "15" style=" margin-top: -15px;">
  
-    <div style="display: flex; align-items: center; justify-content: center; ">
-        <h1 
-        style=" background: -webkit-linear-gradient(yellow, red, black);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bolder;
-  text-align: center;
-  "    
-        >Welcome, To Canteen Management System</h1>
+     <h1 
+     style=" background: -webkit-linear-gradient(yellow, red, black);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+font-weight: bolder;
+"    
+     >Welcome, To Canteen Management System</h1>
+ </marquee>
     </div>
-    </marquee>
 
     <?php ?>

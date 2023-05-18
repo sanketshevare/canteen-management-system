@@ -4,7 +4,7 @@ include("../signin/navigation3.php");
 
 $message = "";
 if (count($_POST) > 0) {
-    $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+    $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
@@ -16,6 +16,9 @@ if (count($_POST) > 0) {
     if ($row == 0) {
         $message = "invalid item name\\nTry again.";
         echo "<script type='text/javascript'>alert('$message');</script>";
+    }
+    else{
+        echo "<script> alert('Item removed successfully')</script>";
     }
 
     $sql = "delete from food_items  where item_name='$a' ";
@@ -188,7 +191,7 @@ if (count($_POST) > 0) {
                                             <select class="input--style-4" name="Item_Id" required id="dropdown">
                                                 <option value="">Select Item</option>
                                                 <?php
-                                                $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+                                                $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
                                                 // Check connection
                                                 if ($conn->connect_error) {
                                                     die("Connection failed: " . $conn->connect_error);
@@ -205,6 +208,7 @@ if (count($_POST) > 0) {
                                                 }
                                                 $conn->close();
                                                 ?>
+                                                <!-- <option value='" . $row["item_name"] . "'><?php echo  $row["item_name"]; ?></option> -->
                                             </select>
                                         </div>
                                     </div>
@@ -228,7 +232,7 @@ if (count($_POST) > 0) {
 
                 <?php
 
-                $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+                $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);

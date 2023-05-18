@@ -11,6 +11,8 @@ $userid = $_SESSION['userid'];
 <html lang="en">
 
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
   <style>
     body {
       flex: 1;
@@ -78,7 +80,7 @@ $userid = $_SESSION['userid'];
 
           <?php
 
-          $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
+          $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system") or die("Connection Error: " . mysqli_error($conn));
           $result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
           $sql = "SELECT credit_amount FROM user WHERE credit_amount>100 and username = '$userid' ";
           $result1 = mysqli_query($conn, $sql);
@@ -89,36 +91,38 @@ $userid = $_SESSION['userid'];
 
 
           //genrerate total bill according to the quantity selected from order page
-          $total_bill = 0;
-          $quantity = $_POST['quantity'];
-          $total_bill = $_POST['price'];
-          $total_bill =  $total_bill * $quantity;
+          $total_bill;
+          // $quantity = $_POST['quantity'];
+          
+          
+          // $total_bill = $_POST['price'];
+            // $total_bill =  trim($total_bill,"RS") * $quantity;
+  
+          // $item_name = $_POST["item_name"];
 
-          $item_name = $_POST["item_name"];
-          $remaining_credit = $credit_amount - $total_bill;
+         
+            $remaining_credit = $credit_amount - $_COOKIE["total"];
+
+          
        
           while ($row = mysqli_fetch_array($result1)) {
             echo "Item : " . $row['item_name'] . " <br><br>";
             echo "Quantity : $quantity <br><br>";
           }
          
-          echo "<h1>Total Bill: $total_bill</h1>";
-          echo "Your Available Credit Amount is: $remaining_credit <br><br>";
+          // echo "<h1>Total Bill: $total_bill</h1>";
+          $user=strtoupper($userid);
+          echo "$user Your Available Credit Amount is: $remaining_credit <br><br>";
 
           $sql = "UPDATE user SET credit_amount = '$remaining_credit' WHERE username = '$userid' ";
+          
           $conn->query($sql); 
           $userid = $_SESSION['userid'];
-          echo $userid;
          
          
      //insert username ite_name and quantity into order_details table
-          $sql1 = "INSERT INTO order_details (username, item_name, item_qty, total_bill) VALUES ('$userid', '$item_name', '$quantity', '$total_bill')";
-          if ($conn->query($sql1) === TRUE) {
-           
-          } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-          }
-         
+          $sql1 = "INSERT INTO order_details (username, item_name, item_qty, total_bill) VALUES ('$userid', ' $_COOKIE["item_name"];', ' $_COOKIE["qty"];', ' $_COOKIE["total"];')";
+          $conn->query($sql1);
           ?>
           <center>
             <div class="container">
@@ -137,8 +141,7 @@ $userid = $_SESSION['userid'];
 
 
 
-
-              <a class="btn" href="./order.php" />Go Back</a>
+              <a class="btn" href="./order.php"  >Go Back</a>
           </center>
         </div>
 

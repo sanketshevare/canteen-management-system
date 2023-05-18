@@ -5,7 +5,7 @@ include("../signin/navigation3.php");
 
 $message="";
 if(count($_POST)>0) {
-	$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
+	$conn = mysqli_connect("localhost","root","","canteen_delivery_system");
 		if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -36,7 +36,10 @@ if(count($_POST)>0) {
 <!DOCTYPE html>
 <html lang="en">
 
-<head><style>
+<head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
+    <style>
       
 
 

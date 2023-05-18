@@ -3,7 +3,7 @@
 
 $message="";
 
-	$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
+	$conn = mysqli_connect("localhost","root","","canteen_delivery_system");
 		if (mysqli_connect_errno())
 
 		$result = mysqli_query($conn," insert into user (username,password ,email,type) values ('" . $_POST["username"] . "','" . $_POST["password"] . "','" . $_POST["privilage"] . "','" . $_POST["email"] . "')");
@@ -22,6 +22,8 @@ $message="";
 <html lang="en">
 
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

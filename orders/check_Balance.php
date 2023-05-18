@@ -13,9 +13,10 @@ session_start();
     <meta name="description" content="Colorlib Templates">
     <meta name="author" content="Colorlib">
     <meta name="keywords" content="Colorlib Templates">
+    <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
 
     <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
+    <title>CMS</title>
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -45,7 +46,7 @@ session_start();
 
 $message="";
 
-	$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
+	$conn = mysqli_connect("localhost","root","","canteen_delivery_system");
 		if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();

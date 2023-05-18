@@ -20,6 +20,8 @@ if(count($_POST)>0) {
 
 <html>
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
 <title>User Login</title>
 <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>

@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
     <meta charset="utf-8">
     <title>Canteen Automation System</title>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -26,7 +28,7 @@
       <input type="password" id="password" name="password" placeholder="********" autocomplete="off"  title="It must contain 8 characters containing atleast one lowercase, one uppercase and one number" required>
       <br><br>
 
-      <input type="submit" value="Sign In" name="submit">
+      <input type="submit" onclick="validate()" value="Sign In" name="submit">
 
 
     </form>
@@ -34,7 +36,22 @@
     </div>
 
 
-
+    <script type="text/javascript">
+        function validate() {
+  
+            var user = document.getElementById("e").value;
+            var user2 = document.getElementById("e");
+            var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (re.test(user)) {
+                alert("done");
+                return true;
+            }
+            else {
+                user2.style.border = "red solid 3px";
+                return false;
+            }
+        }
+    </script>
   </body>
 </html>
 
@@ -47,7 +64,7 @@
 <?php
 $message="";
 if(count($_POST)>0) {
-$conn = mysqli_connect("localhost","phpmyadmin","admin","canteen_delivery_system");
+$conn = mysqli_connect("localhost","root","","canteen_delivery_system");
 if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -56,16 +73,19 @@ $result = mysqli_query($conn,"SELECT * FROM user WHERE username='" . $_POST["use
 $result1=mysqli_query($conn,"SELECT * FROM user WHERE username='" . $_POST["userName"] . "' and password = '". $_POST["password"]."' and type = '1' ");
 $count  = mysqli_num_rows($result);
 $count1  = mysqli_num_rows($result1);
-if($count==0) {
-$message = "Invalid Username or Password!";
-} else {
-$message = "You are successfully authenticated!";
-$_SESSION["userid"] = $_POST["userName"];
+if($count==1) {
+  header("Location: user.php");
+  $_SESSION["userid"] = $_POST["userName"];
 
-if($count1==0)
-header("Location: user1.html");
-else {
+} else {
+  $message = "Invalid Username or Password!";
+
+// $message = "You are successfully authenticated!";
+
+if($count1==1)
 header("Location: admin.html");
+else {
+  $message = "Invalid Username or Password!";
 }
 exit;
 

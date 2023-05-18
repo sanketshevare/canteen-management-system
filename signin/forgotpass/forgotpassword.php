@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CMS</title>
+    <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
     <style>
         body {
             display: flex;
@@ -24,7 +26,7 @@
 
 
             width: 30%;
-            height: 90%;
+            height: 100%;
             border-radius: 10px;
             box-shadow: 0px 0px 20px 0px #000;
             margin-top: 50px;
@@ -53,7 +55,6 @@
             border-radius: 5px;
             padding: 10px;
             font-size: 15px;
-            margin-left: 30px;
         }
 
         .main input[type="submit"] {
@@ -64,7 +65,6 @@
             color: #fff;
             font-size: 20px;
             border-radius: 5px;
-            margin-left: calc(40% - 50px);
             margin-top: 20px;
             width: 30%;
             cursor: pointer;
@@ -95,7 +95,7 @@
       font-family: 'Roboto', sans-serif;
     }
     .error {
-        color: grey;
+        color: black;
         position: absolute;
         top: 0;
     }
@@ -105,7 +105,7 @@
 
 <body background="../../assets/for.jpg">
     <div class="main">
-      
+      <center>
         <form method="post">
       <h1> Forgot Password </h1>
 
@@ -131,8 +131,9 @@
 
             <input type="submit" value="Submit" name="submit">
             <br><br>
-            <h3 > <a href="../index.php" style=" margin-left: 155px;"> Back to Login</a> </h3>
+            <h3 > <a href="../index.php" > Back to Login</a> </h3>
         </form>
+</center>
     </div>
 </body>
 
@@ -145,7 +146,7 @@
 
 
 if (count($_POST) > 0) {
-    $con = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+    $con = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
@@ -158,10 +159,21 @@ if (count($_POST) > 0) {
         $answer = $_REQUEST['answer'];
         $password = $_REQUEST['password'];
 
+        $uppercase = preg_match('@[A-Z]@', $password);
+$lowercase = preg_match('@[a-z]@', $password);
+$number    = preg_match('@[0-9]@', $password);
+$specialChars = preg_match('@[^\w]@', $password);
+    $length = strlen($password);
+    
+        if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+            echo '<script>alert("Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character");</script>';
+      
+          } else {
         $query    = "select * from `user` where username='$username' and security_question='$security_question' and answer='$answer'";
         $result = mysqli_query($con, $query);
         $row = mysqli_fetch_array($result);
         $count = mysqli_num_rows($result);
+
 
         if ($count == 1) {
             $query    = "update `user` set password='$password' where username='$username'";
@@ -170,10 +182,10 @@ if (count($_POST) > 0) {
             <h3>Password Changed.</h3></div>";
         } else {
             echo "<div class='error'>
-            <h3>Try again.</h3>
+            <h3>Invalid username or security answer...</h3>
             </div>";
         }
     }
 }
-
+}
 ?>

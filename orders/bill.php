@@ -1,6 +1,4 @@
 <?php 
-error_reporting(0);
-
 include("../signin/navigation2.php");
    include("../signin/config/db.php");
    $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
@@ -10,7 +8,7 @@ include("../signin/navigation2.php");
    $userid = $_SESSION['userid'];
    $sql = "SELECT credit_amount FROM user WHERE credit_amount>100 and username = '$userid' ";
    $result1 = mysqli_query($conn, $sql);
-   $row = mysqli_fetch_array($result1);
+   $row = mysqli_fetch_assoc($result1);
    $credit_amount = $row['credit_amount'];
    $result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
    ?>
@@ -59,9 +57,6 @@ include("../signin/navigation2.php");
                         <td scope="row">1</td>
                         <td style="width:60%">
                            <select name="vegitable" id="vegitable"  class="form-control">
-                              <option value="select">
-                                 select
-                              </option>
                               <?php 
                                  $sql = "SELECT * FROM food_items";
                                  $query = mysqli_query($conn,$sql);
@@ -113,7 +108,7 @@ include("../signin/navigation2.php");
                               <th class="text-center">Total</th>
                            </tr>
                         </thead>
-                        <tbody id="new" name="new" >
+                        <tbody id="new" >
                           
                         </tbody>
                         <tr>
@@ -154,28 +149,6 @@ include("../signin/navigation2.php");
    </body>
 </html>
 <script>
-
-
-function createCookie(name, value, days) {
-
-  let text = new Date().getTime().toString();
-let result = text.substr(0, 10);
-    var expires;
-      
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
-    }
-    else {
-        expires = "";
-    }
-      
-    document.cookie = escape(name) + "=" + 
-        escape(value) + expires + "; path=/";
-}
-
-
    $(document).ready(function(){
      $('#vegitable').change(function() {
       var id = $(this).find(':selected')[0].id;
@@ -197,11 +170,9 @@ let result = text.substr(0, 10);
      $('#add').on('click',function(){
     
         var name = $('#vegitable').val();
-
         var qty = $('#qty').val();
         var price = $('#price').text();
-       
-
+ 
         if(qty == 0)
         {
            var erroMsg =  '<span class="alert alert-danger ml-5">Minimum Qty should be 1 or More than 1</span>';
@@ -209,29 +180,9 @@ let result = text.substr(0, 10);
         }
         else
         {
-           billFunction(); 
-
-           function storeItem(name, quantity) {
-      $.ajax({
-        method: 'POST',
-        url: './store.php',
-        data: {
-          name: name,
-          quantity: quantity
-        },
-        success: function(response) {
-          console.log('Item stored in the database.');
-        
-        },
-        error: function(xhr, status, error) {
-          console.error('Error storing item in the database:', error);
+           billFunction(); // Below Function passing here 
         }
-      });
-    }
-           storeItem(name, qty); // Store the item in the database
-
-          
-        }
+         
         function billFunction()
           {
           var total = 0;
@@ -265,29 +216,10 @@ let result = text.substr(0, 10);
  
              var totalPayment = parseFloat(Subtotal) + parseFloat(taxAmount);
              $('#totalPayment').text(totalPayment.toFixed(2)); // Showing using ID 
-             createCookie("total", totalPayment, "10");
-            createCookie("item_name", name, "10");
-            createCookie("qty", qty, "10");    
-            // createCookie("userid", , "10");    
-
-   
-
-
-  //   <?php 
-  //   $userid = $_SESSION['userid'];
-
-  //    $total =  $_COOKIE["total"];
-  //    $item_name = $_COOKIE["item_name"];
-  //    $qty =  $_COOKIE["qty"];
-  //    $sql1 = "INSERT INTO order_details (username, item_name, item_qty, total_bill) VALUES ('$userid', ' $item_name', '$qty', ' $total')";
-  // $conn->query($sql1);
-  // ?>
-// Function to create the cookie
-
+        
          });
          count++;
-        }
-         
+        } 
        });
            // Code for year 
              
@@ -316,8 +248,6 @@ let result = text.substr(0, 10);
                 var day = myFunction();
                 $('#day').text(day);
      });
-
-   
 </script>
  
 <!-- // Code for TIME -->
@@ -330,38 +260,3 @@ let result = text.substr(0, 10);
         setTimeout(displayClock, 1000); 
      }
 </script>
-
-<?php 
-
-
-$userid = $_SESSION['userid'];
-$result = mysqli_query($conn, "SELECT * FROM food_items WHERE include=1");
-$sql = "SELECT credit_amount FROM user WHERE credit_amount>100 and username = '$userid' ";
-$result1 = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($result1);
-$credit_amount = $row['credit_amount'];
-// echo "<h2>Order Details</h2>";
-// echo "<h3>Your Total Credit Amount is: $credit_amount</h3>";
-     $total =  $_COOKIE["total"];
-//     echo $total;
-//      echo $_COOKIE["item_name"];
-//     echo $_COOKIE["qty"];
-// $error= $_COOKIE['err'];
-// echo $error;
-
-if(isset($_POST['submit'])){
-      // $error=$_SESSION['err']  ;
-      if($credit_amount>=$total || $credit_amount!=0){
-
-         $credit_amount = $credit_amount - $total;
-         $sql = "UPDATE user SET credit_amount = '$credit_amount' WHERE username = '$userid' ";
-         $conn->query($sql); 
-         echo $error;
-
-      }
-       
-  $userid = $_SESSION['userid'];
-  header('Location: order_details.php');
-  redirect("./order_details.php");
-}
-?>

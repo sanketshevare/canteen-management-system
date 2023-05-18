@@ -1,26 +1,60 @@
 <?php
 include("../signin/navigation3.php");
+error_reporting(0);
 
 $message = "";
+$item_name = $_POST["Item_name"];
+$cost = $_POST["Item_cost"];
+
 if (count($_POST) > 0) {
-    $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+    $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
-    $result = mysqli_query($conn, " insert into food_items values ('"  . $_POST["Item_name"] . "','" . $_POST["Item_cost"] . "','1')");
 
-    if (!$result) {
-        $message = "invalid item\\nTry again.";
+    // Check if the item name already exists
+    $existingItemQuery = "SELECT * FROM food_items WHERE item_name = ?";
+    $existingItemStmt = mysqli_prepare($conn, $existingItemQuery);
+    mysqli_stmt_bind_param($existingItemStmt, "s", $item_name);
+    mysqli_stmt_execute($existingItemStmt);
+    $existingItemResult = mysqli_stmt_get_result($existingItemStmt);
+
+    if (mysqli_num_rows($existingItemResult) > 0) {
+        $message = "Item already exists. Try again with a different name.";
         echo "<script type='text/javascript'>alert('$message');</script>";
+    } else {
+        $insertQuery = "INSERT INTO food_items (item_name, price, include) VALUES (?, ?, 1)";
+        $insertStmt = mysqli_prepare($conn, $insertQuery);
+        mysqli_stmt_bind_param($insertStmt, "ss", $item_name, $cost);
+        $result = mysqli_stmt_execute($insertStmt);
+
+        if (!$result) {
+            $message = "Invalid item. Try again.";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
+        else{
+            echo "<script> alert('Item added successfully')</script>";
+        }
+
+        mysqli_stmt_close($insertStmt);
     }
+
+    mysqli_stmt_close($existingItemStmt);
+    mysqli_close($conn);
 }
 ?>
+
+
+<!-- Rest of your HTML code -->
+
 
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+<link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -190,7 +224,7 @@ if (count($_POST) > 0) {
 
             <?php
 
-            $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+            $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
             // Check connection
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);

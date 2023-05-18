@@ -8,7 +8,9 @@ include("../signin/navigation3.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkCFQFc0dRVnFNKYPyAUN7UfnojKLQHrJ97WYWAAxqDtjFwdRPTKgKZWCfv9e-GgzTxA&usqp=CAU">
+
+    <title>CMS</title>
     <style>
         table {
             display: inline-;
@@ -56,19 +58,22 @@ include("../signin/navigation3.php");
 
             </tr>
             <?php
-            $conn = mysqli_connect("localhost", "phpmyadmin", "admin", "canteen_delivery_system");
+            $conn = mysqli_connect("localhost", "root", "", "canteen_delivery_system");
             // Check connection
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT *  FROM queries";
+            // $sql = "SELECT *  FROM queries";
 
 
-            $result = $conn->query($sql);
+            // $result = $conn->query($sql);
+            $result = mysqli_query($conn, "SELECT *  FROM queries");
             if ($result->num_rows >= 0) {
                 // output data of each row
-                while ($row = $result->fetch_assoc()) {
+                // while ($row = $result->fetch_assoc()) {
+                    while($row = mysqli_fetch_array($result)) {
+
                     echo "<tr><td>" . $row["firstName"] . "</td><td>" . $row["lastName"] . "</td><td>" . $row["dept"] . "</td><td>" . $row["message"] . "</td>";
                 }
                 echo "</table>";
