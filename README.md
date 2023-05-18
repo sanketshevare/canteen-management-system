@@ -44,7 +44,7 @@ Open a pull request.
 
 Please make sure to update tests as appropriate and adhere to the code of conduct.
 
-Contact
-If you have any questions or need further assistance, feel free to reach out:
+If you have any questions or need further assistance, feel free to reach out.
 
 Project Link: https://github.com/sanketshevare/canteen-management-system
+
